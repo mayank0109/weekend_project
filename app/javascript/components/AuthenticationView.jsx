@@ -107,7 +107,7 @@ const AuthenticationView = () => {
   
       <Switch>
       {/* <Route path="/auth/login" element={<Home />} exact/> */}
-      <Route path="/auth/login"  exact>
+      <Route path="/login"  exact>
     <Login />
     </Route>
       </Switch>

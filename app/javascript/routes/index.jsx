@@ -52,37 +52,15 @@ const Background = styled.div`
 `;
 
 const Index = () => {
-  return  (
+  return (
     <ThemeProvider theme={theme}>
-              <Router>
-
-      <Switch>
-    <Route path="/auth" >
-    <AuthenticationView />
-    </Route>
-    </Switch>
-             </Router>
-
-    {/* // <ThemeP
-    rovider theme={theme}>
-
-    // <Container className={classes.container}>
-    //     <Main className={classes.main}>
-    //       <Background className={classes.background}>
-    //         <div className={classes.content}>
-    //         <Router>
-  
-    //   <Routes>
-    //   <Route path="/login" element={<Home />} />
-    //   <Route path="/" element={<Home />} />
-    //   </Routes>
-  
-    // </Router>
-    //         </div>
-    //       </Background>
-    //     </Main>
-    //   </Container>
-    //   </ThemeProvider> */}
+      <Router>
+        <Switch>
+          <Route path="/" >
+            <AuthenticationView />
+          </Route>
+        </Switch>
+      </Router>
     </ThemeProvider>
   );
 }
