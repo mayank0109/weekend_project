@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useHistory, Redirect } from "react-router-dom";
 import Alert from '@material-ui/lab/Alert';
 import { setToLocalStorage } from "./utils/storage";
 

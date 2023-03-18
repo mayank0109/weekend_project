@@ -3,4 +3,5 @@
 class Api::V1::BaseController < ApplicationController
   include Authenticable
   include ApiResponders
+  include ApiRescuable
 end

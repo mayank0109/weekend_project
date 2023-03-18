@@ -6,18 +6,20 @@ const logout = () => axios.delete("api/v1/logout");
 
 const signup = ({
   email,
-  firstName: first_name,
-  lastName: last_name,
+  first_name,
+  last_name,
   password,
-  passwordConfirmation: password_confirmation,
+  password_confirmation,
+  referred_by_id
 }) =>
-  axios.post("api/v1/users", {
+http.post("api/v1/users", {
     user: {
       email,
       first_name,
       last_name,
       password,
       password_confirmation,
+      referred_by_id
     },
   });
 

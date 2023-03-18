@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import styled from "styled-components";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import Login from "./Login";
+import Signup from "./Signup";
 import * as colors from "./utilities/colors";
 
 const useStyles = makeStyles((theme) => ({
@@ -107,6 +108,9 @@ const AuthenticationView = () => {
                 <Switch>
                    <Route path="/login" exact>
                     <Login />
+                  </Route>
+                  <Route path="/signup" exact>
+                    <Signup />
                   </Route>
                   <Route path="/">
                     <Redirect to={{ pathname: "/login"} }/>
