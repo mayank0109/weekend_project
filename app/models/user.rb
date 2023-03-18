@@ -11,8 +11,9 @@ class User < ApplicationRecord
 
   before_save :ensure_authentication_token_is_present
 
-  has_many :referred_users, :foreign_key => 'referred_by_id'
+  has_many :referals, class_name: 'ReferredUser', foreign_key: 'referred_by_id'
   belongs_to :referrer, class_name: 'User', foreign_key: 'referred_by_id', optional: true
+  has_many :referred_users, class_name: 'User', foreign_key: 'referred_by_id'
 
   def name
     [first_name, last_name].join(" ").strip

@@ -24,7 +24,7 @@ const Signup = () => {
 
   const [formData, setFormData] = useState({
     email: searchParams.get("email"),
-    referred_by: searchParams.get("referred_by_id")
+    referred_by_id: searchParams.get("referred_by_id")
   });
 
   const [error, setError] = useState("");

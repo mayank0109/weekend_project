@@ -11,13 +11,13 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resources :referral, only: [:create]
+      resources :referral, only: [:create, :index]
       devise_scope :user do
         post "login", to: "sessions#create", as: "login"
         delete "logout", to: "sessions#destroy", as: "logout"
       end
   
-      resources :users, only: [:show, :create, :update, :destroy], constraints: { id: /.*/ }
+      resources :users, only: [:show, :create, :update, :destroy, :index], constraints: { id: /.*/ }
       end
   end
 

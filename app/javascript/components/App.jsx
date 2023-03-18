@@ -1,9 +1,9 @@
 import React from "react";
-import Index from "../routes";
+import Main from "./Main";
 
 const App = () => {
   return(
-    <Index/>
+    <Main />
   )
 }
 

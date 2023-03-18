@@ -12,6 +12,9 @@ class Api::V1::UsersController < Api::V1::BaseController
 
   def create
     user = User.create!(user_params)
+    if user.referrer.present?
+      ReferredUser.find_by(email: user_params[:email]).destroy!
+    end
     respond_with_success(
       t("signup_successful"),
       :ok,
@@ -31,6 +34,6 @@ class Api::V1::UsersController < Api::V1::BaseController
     end
 
     def user_params
-      params.require(:user).permit(:email, :first_name, :last_name, :password, :password_confirmation, :referred_by)
+      params.require(:user).permit(:email, :first_name, :last_name, :password, :password_confirmation, :referred_by_id)
     end
 end

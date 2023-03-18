@@ -1,9 +1,11 @@
 import http from "./axios";
 
 const create = payload => http.post("/api/v1/referral", { ...payload });
+const index = payload => http.get("/api/v1/referral");
 
 const referral = {
-  create
+  create,
+  index
 };
 
 export default referral;
