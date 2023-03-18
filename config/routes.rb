@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
+      resources :referral, only: [:create]
       devise_scope :user do
         post "login", to: "sessions#create", as: "login"
         delete "logout", to: "sessions#destroy", as: "logout"

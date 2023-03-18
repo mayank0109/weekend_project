@@ -10,12 +10,12 @@ class User < ApplicationRecord
 
   before_save :ensure_authentication_token_is_present
 
-  private
 
   def name
     [first_name, last_name].join(" ").strip
   end
 
+  private
 
   def ensure_authentication_token_is_present
     if authentication_token.blank?

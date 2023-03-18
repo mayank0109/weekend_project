@@ -60,6 +60,7 @@ end
 
 group :development do
   gem 'pry'
+  gem 'letter_opener' # opens generated emails in a new browser tab
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
 
