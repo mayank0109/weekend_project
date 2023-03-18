@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -18,9 +18,13 @@ export default function FeedView() {
 
   const [refereeEmail, setRefereeEmail] = useState("");
   const [referredUsers, setReferredUsers] = useState([]);
-  const [referalConvertedToUsers, setReferalConvertedToUsers] = useState([]);
+  const [referrals, setReferrals] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    loadReferalsData();
+  }, [])
 
   onRefereeChange = (e) => {
     setRefereeEmail(e.target.value);
@@ -50,7 +54,7 @@ export default function FeedView() {
     referral.index().
       then((response) => {
         setReferredUsers(response.data.referred_users);
-        setReferalConvertedToUsers(response.data.referals_converted_to_user);
+        setReferrals(response.data.referrals);
         setLoading(false);
       })
   }
@@ -103,7 +107,7 @@ export default function FeedView() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {referredUsers.map((row) => (
+              {referrals.map((row) => (
                 <TableRow key={row.name}>
                   <TableCell component="th" scope="row">
                     {row.email}
@@ -129,7 +133,7 @@ export default function FeedView() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {referalConvertedToUsers.map((row) => (
+                {referredUsers.map((row) => (
                   <TableRow key={row.name}>
                     <TableCell component="th" scope="row">
                       {row.email}

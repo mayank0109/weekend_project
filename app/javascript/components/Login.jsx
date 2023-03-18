@@ -32,13 +32,15 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsLoading(true);
     authenticationApi.login({ email, password }).
       then(({ data }) => {
+        setIsLoading(false);
         setToLocalStorage("authToken", data.auth_token);
         setToLocalStorage("authEmail", email);
         window.location.href = "/feed";
       }).
-      catch(({ response: { data: { error } } }) => setError(error));
+      catch(({ response: { data: { error } } }) => {setError(error); setIsLoading(false);});
   };
 
   return (
