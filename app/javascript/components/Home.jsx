@@ -80,7 +80,6 @@ const Background = styled.div`
 
 
 const Home = () => {
-
   return(
 
     <p>dsakjn</p>

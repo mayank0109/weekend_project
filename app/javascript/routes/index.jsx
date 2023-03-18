@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect, useLocation } from "react-router-dom";
 import Home from "../components/Home";
 import Login from "../components/Login";
 import theme, { baseFontSize } from "../components/utilities/theme";
@@ -7,7 +7,8 @@ import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
 import styled from "styled-components";
 import AuthenticationView from "../components/AuthenticationView";
-
+import { getFromLocalStorage } from "../components/utils/storage";
+import DashBoardView from "../components/DashBoardView";
 
 const Container = styled.div`
   min-height: 100vh;
@@ -52,12 +53,34 @@ const Background = styled.div`
 `;
 
 const Index = () => {
+  const token = getFromLocalStorage("authToken");
+
+  const RequireAuth = ({ children }) => {
+    const location = useLocation();
+
+    return (
+      <>
+        {token ? (
+          children
+        ) : (
+          <Redirect
+            to={{ pathname: "/login", state: { referrer: location } }}
+          />
+        )}
+      </>
+    );
+  };
   return (
     <ThemeProvider theme={theme}>
       <Router>
         <Switch>
-          <Route path="/" >
+          {!token && <Route path="/" >
             <AuthenticationView />
+          </Route>}
+          <Route path="/">
+            <RequireAuth>
+              <DashBoardView />
+            </RequireAuth>
           </Route>
         </Switch>
       </Router>

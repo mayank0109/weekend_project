@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import Alert from '@material-ui/lab/Alert';
+import { setToLocalStorage } from "./utils/storage";
 
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
@@ -33,7 +34,11 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     authenticationApi.login({ email, password }).
-      then((response) => console.log(response)).
+      then(({ data }) => {
+        setToLocalStorage("authToken", data.auth_token);
+        setToLocalStorage("authEmail", email);
+        window.location.href = "/feed";
+      }).
       catch(({ response: { data: { error } } }) => setError(error));
   };
 

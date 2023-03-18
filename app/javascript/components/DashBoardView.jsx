@@ -4,9 +4,8 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-d
 import { makeStyles } from "@material-ui/core/styles";
 import styled from "styled-components";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-import Login from "./Login";
 import * as colors from "./utilities/colors";
-
+import FeedView from "./FeedView";
 const useStyles = makeStyles((theme) => ({
   container: {
     backgroundColor: theme.palette.hero.main,
@@ -67,8 +66,9 @@ const Background = styled.div`
   width: 100%;
 `;
 
-const AuthenticationView = () => {
+const DashBoardView = () => {
   const classes = useStyles();
+
   return (
     <ThemeProvider
       theme={(theme) =>
@@ -103,14 +103,15 @@ const AuthenticationView = () => {
           <Background className={classes.background}>
             <div className={classes.content}>
               <Router>
-
                 <Switch>
-                   <Route path="/login" exact>
-                    <Login />
+                  <Route path="/feed" exact>
+                    <FeedView />
                   </Route>
                   <Route path="/">
-                    <Redirect to={{ pathname: "/login"} }/>
-                  </Route>
+                    <Redirect
+                      to={{ pathname: "/feed" }}
+                    />
+                  </Route >
                 </Switch>
               </Router>
             </div>
@@ -122,4 +123,4 @@ const AuthenticationView = () => {
   )
 }
 
-export default AuthenticationView;
+export default DashBoardView;
