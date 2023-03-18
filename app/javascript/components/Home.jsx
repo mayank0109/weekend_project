@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import { Link as RouterLink, Route } from "react-router-dom";
 import styled from "styled-components";

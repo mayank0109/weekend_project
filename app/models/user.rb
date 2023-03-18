@@ -4,12 +4,14 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :email, uniqueness: true
+  validates :email, uniqueness: true, format: { with: Devise.email_regexp }
+
   validates :password_confirmation, presence: true, on: :create
   validates :first_name, :last_name, :email, presence: true
 
   before_save :ensure_authentication_token_is_present
 
+  has_many :referred_users, :foreign_key => 'referred_by_id'
 
   def name
     [first_name, last_name].join(" ").strip
