@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -10,14 +10,15 @@ import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import TextField from '@material-ui/core/TextField';
 import referral from "./apis/referral";
+import authentication from "./apis/authentication";
 import Alert from '@material-ui/lab/Alert';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 export default function FeedView() {
+
   const [refereeEmail, setRefereeEmail] = useState("");
   const [referredUsers, setReferredUsers] = useState([]);
   const [referalConvertedToUsers, setReferalConvertedToUsers] = useState([]);
-  const [refreshTable, setRefreshTable] = useState(true);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -25,21 +26,26 @@ export default function FeedView() {
     setRefereeEmail(e.target.value);
   }
 
-  const logout = () => {
-    localStorage.removeItem("authToken");
+  const logout = (e) => {
+    authentication.logout().
+      then(_ => {
+        localStorage.removeItem("authToken");
+        localStorage.removeItem("authEmail");
+        window.location = "/"
+      })
   }
 
   handleRefereeSubmit = (e) => {
     e.preventDefault();
     referral.create({ email: refereeEmail }).
       then(_ => {
-        setRefreshTable(!refreshTable);
+        loadReferalsData();
         setRefereeEmail("");
       }).
       catch(({ response: { data: { error } } }) => setError(error));
   }
 
-  useEffect(() => {
+  loadReferalsData = () => {
     setLoading(true);
     referral.index().
       then((response) => {
@@ -47,7 +53,7 @@ export default function FeedView() {
         setReferalConvertedToUsers(response.data.referals_converted_to_user);
         setLoading(false);
       })
-  }, [refreshTable])
+  }
 
   return (
     <>
@@ -57,7 +63,7 @@ export default function FeedView() {
         justifyContent="flex-end"
         alignItems="flex-end"
       >
-        <Button sx={{ justifyContent: "space-between" }} onClick={logout}>Logout</Button>
+        <Button sx={{ justifyContent: "space-between" }} type="submit" onClick={() => logout()}>Logout</Button>
       </Box>
       <Box
         m={3}

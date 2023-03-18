@@ -2,7 +2,7 @@ import http from "./axios";
 
 const login = payload => http.post("api/v1/login", { user: payload });
 
-const logout = () => axios.delete("api/v1/logout");
+const logout = () => http.delete("api/v1/logout");
 
 const signup = ({
   email,

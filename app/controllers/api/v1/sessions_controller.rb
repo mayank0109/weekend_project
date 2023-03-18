@@ -15,7 +15,7 @@ class Api::V1::SessionsController < Api::V1::BaseController
   end
 
   def destroy
-    sign_out(@user)
+    sign_out(current_user)
     reset_session
   end
 
