@@ -33,6 +33,12 @@ http.interceptors.response.use(
     return response;
   },
   error => {
+    const { status } = error.response
+    if(status === 401){
+      localStorage.removeItem("authToken");
+      localStorage.removeItem("authEmail");
+      window.location = "/login";
+    }
     return Promise.reject(error);
   }
 );

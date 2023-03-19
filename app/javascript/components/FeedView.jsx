@@ -105,7 +105,7 @@ export default function FeedView() {
       >
         <TableContainer component={Paper} style={{ maxHeight: 300 }}>
           <p>Below are all the email ids that have been refered by you and their account creation is still pending</p>
-          <Table sx={{ minWidth: 20 }} aria-label="caption table">
+          <Table sx={{ minWidth: 20 }} stickyHeader aria-label="caption table">
             <TableHead>
               <TableRow>
                 <TableCell>Email</TableCell>
@@ -131,7 +131,7 @@ export default function FeedView() {
         >
           <TableContainer component={Paper} style={{ maxHeight: 300 }}>
             <p>Below are all the email ids that have been refered by you and they have created the account in this app</p>
-            <Table sx={{ minWidth: 20 }} aria-label="caption table">
+            <Table sx={{ minWidth: 20 }} stickyHeader aria-label="caption table">
               <TableHead>
                 <TableRow>
                   <TableCell>Email</TableCell>
