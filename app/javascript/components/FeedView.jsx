@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import Button from "@material-ui/core/Button";
-import Box from "@material-ui/core/Box";
-import TextField from '@material-ui/core/TextField';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Button,
+  Box,
+  CircularProgress
+} from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
+
+import TextField from './TextField';
 import referral from "./apis/referral";
 import authentication from "./apis/authentication";
-import Alert from '@material-ui/lab/Alert';
-import CircularProgress from '@material-ui/core/CircularProgress';
 
 export default function FeedView() {
 
@@ -40,13 +43,15 @@ export default function FeedView() {
   }
 
   handleRefereeSubmit = (e) => {
+    setLoading(true);
     e.preventDefault();
     referral.create({ email: refereeEmail }).
       then(_ => {
         loadReferalsData();
         setRefereeEmail("");
+        setLoading(false);
       }).
-      catch(({ response: { data: { error } } }) => setError(error));
+      catch(({ response: { data: { error } } }) => { setError(error); setLoading(false); });
   }
 
   loadReferalsData = () => {
@@ -79,7 +84,7 @@ export default function FeedView() {
 
           <TextField id="outlined-basic" label="Referee Email" variant="outlined" required type="email"
             value={refereeEmail} onChange={onRefereeChange} />
-          <Button sx={{ justifyContent: "space-between" }} type="submit">Refer your friend</Button>
+          <Button sx={{ justifyContent: "space-between" }} type="submit" disabled={loading}>Refer your friend</Button>
         </form>
       </Box>
       <Box

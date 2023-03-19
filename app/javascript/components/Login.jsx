@@ -1,11 +1,11 @@
 import React, { useState } from "react";
+import {Box, Button} from "@material-ui/core";
 import Alert from '@material-ui/lab/Alert';
-import { setToLocalStorage } from "./utils/storage";
-
-import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
-import TextField from "./TextField/TextField";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+
+import TextField from "./TextField";
+import { setToLocalStorage } from "./utilities/storage";
 import authenticationApi from "./apis/authentication";
 
 
@@ -84,6 +84,7 @@ const Login = () => {
         </Box>
       </form>
       <Box mt={3} align="center">
+        Don't have an account? <Link to="/signup">Signup</Link>
       </Box>
     </>
   )

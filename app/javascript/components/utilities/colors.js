@@ -26,19 +26,3 @@ export const tomato = "#eb6023";
 export const white = "#ffffff";
 export const torchRed = "#ff0033";
 export const monza = "#b00020";
-
-export const schemes = {
-  default: [
-    smaltBlue,
-    freshEggplant,
-    gulfBlue,
-    dodgerBlue,
-    pastelGreen,
-    eminence,
-    fadedRed,
-    shingleFawn,
-    cinnabar,
-    mardiGras,
-    mauve,
-  ],
-};

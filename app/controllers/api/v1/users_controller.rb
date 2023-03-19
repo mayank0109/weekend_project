@@ -11,15 +11,16 @@ class Api::V1::UsersController < Api::V1::BaseController
   end
 
   def create
-    user = User.create!(user_params)
-    if user.referrer.present?
-      ReferredUser.find_by(email: user_params[:email]).destroy!
+    user = User.new(user_params)
+    if user.save
+      respond_with_success(
+        t("signup_successful"),
+        :ok,
+        { user: user, auth_token: user.authentication_token }
+      )
+    else
+      respond_with_error(user.errors.full_messages.to_sentence)
     end
-    respond_with_success(
-      t("signup_successful"),
-      :ok,
-      { user: user, auth_token: user.authentication_token }
-    )
   end
 
   def destroy

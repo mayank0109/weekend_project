@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect, useLocation } from "r
 import theme from "./utilities/theme";
 import { ThemeProvider } from "@material-ui/core/styles";
 import AuthenticationView from "./AuthenticationView";
-import { getFromLocalStorage } from "./utils/storage";
+import { getFromLocalStorage } from "./utilities/storage";
 import DashBoardView from "./DashBoardView";
 
 const Main = () => {
